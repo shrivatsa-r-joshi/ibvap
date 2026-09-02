@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+ultralytics
+opencv-python
+python-dotenv
+websockets
+twilio
+sendgrid
+pydantic

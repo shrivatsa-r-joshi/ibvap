@@ -1,0 +1,22 @@
+# Env / secrets
+.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.db
+
+# Node
+node_modules/
+dist/
+build/
+
+# Video assets (too large for git — share via Drive link in team chat)
+backend/sample_videos/*
+!backend/sample_videos/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

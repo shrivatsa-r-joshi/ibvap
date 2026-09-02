@@ -1,0 +1,7 @@
+/* Owner: Frontend — starter styles, adjust freely */
+body { margin: 0; font-family: sans-serif; background: #10141a; color: #e7e9ec; }
+.app { padding: 24px; }
+.main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 16px; }
+.roadmap-row { display: flex; gap: 12px; margin-top: 20px; }
+.roadmap-card { flex: 1; border: 1px solid #2a3340; border-radius: 8px; padding: 14px; }
+.roadmap-badge { font-size: 11px; color: #e2933f; }
