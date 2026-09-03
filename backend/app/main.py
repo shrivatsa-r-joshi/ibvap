@@ -20,7 +20,9 @@ import asyncio
 import logging
 from datetime import datetime, timezone
 
+# pyrefly: ignore [missing-import]
 import cv2
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 
 from app.ws.manager import ConnectionManager

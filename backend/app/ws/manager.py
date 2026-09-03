@@ -6,6 +6,7 @@ every `detection` and `alert` message (docs/schema.md) to all of them as JSON.
 """
 import json
 import logging
+# pyrefly: ignore [missing-import]
 from fastapi import WebSocket
 
 logger = logging.getLogger("ibvap.ws")

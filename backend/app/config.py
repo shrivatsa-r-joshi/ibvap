@@ -6,6 +6,7 @@ Every other module should import config values from here rather than reading
 os.environ directly, so there's one place to look when something's misconfigured.
 """
 import os
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 load_dotenv()
