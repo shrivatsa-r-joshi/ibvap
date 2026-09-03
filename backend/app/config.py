@@ -20,3 +20,4 @@ FENCE_LINE_COORDS = tuple(
 )
 
 DATABASE_PATH = os.getenv("DATABASE_PATH", "backend/app/db/events.db")
+WS_PORT = int(os.getenv("WS_PORT", "8000"))
