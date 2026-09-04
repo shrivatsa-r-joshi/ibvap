@@ -6,6 +6,7 @@ Every other module should import config values from here rather than reading
 os.environ directly, so there's one place to look when something's misconfigured.
 """
 import os
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,3 +21,4 @@ FENCE_LINE_COORDS = tuple(
 )
 
 DATABASE_PATH = os.getenv("DATABASE_PATH", "backend/app/db/events.db")
+WS_PORT = int(os.getenv("WS_PORT", "8000"))
