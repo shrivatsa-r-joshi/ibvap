@@ -6,6 +6,7 @@ venv/
 __pycache__/
 *.pyc
 *.db
+*.pt
 
 # Node
 node_modules/
@@ -15,6 +16,7 @@ build/
 # Video assets (too large for git — share via Drive link in team chat)
 backend/sample_videos/*
 !backend/sample_videos/.gitkeep
+sample_videos/*
 
 # OS / editor
 .DS_Store

@@ -107,7 +107,7 @@ class YOLOVideoDetector:
         self.conf_threshold = (
             conf_threshold
             if conf_threshold is not None
-            else (getattr(config, "CONFIDENCE_THRESHOLD", 0.45) if config else 0.45)
+            else (getattr(config, "CONFIDENCE_THRESHOLD", 0.28) if config else 0.28)
         )
         self.tracker_config = tracker_config or (
             getattr(config, "TRACKER_CONFIG", "bytetrack.yaml") if config else "bytetrack.yaml"
@@ -229,10 +229,11 @@ class YOLOVideoDetector:
                     raw_xyxy = box.xyxy[0].tolist()
                     norm_bbox = normalize_bbox(raw_xyxy, frame_width, frame_height)
 
-                    # 2. Class mapping (filter down to "person" or "vehicle")
+                    # 2. Class mapping (filter down to "person" or "vehicle", or all if target_classes is None)
                     cls_id = int(box.cls[0].item())
                     cls_name = result.names.get(cls_id, "")
-                    target_class = map_class(class_name=cls_name, class_id=cls_id)
+                    allow_all = (self.target_classes is None)
+                    target_class = map_class(class_name=cls_name, class_id=cls_id, allow_all=allow_all)
                     if target_class is None:
                         continue
 
@@ -323,8 +324,11 @@ def open_video_source(source_str: Union[str, int]) -> cv2.VideoCapture:
     elif str(source_str).isdigit():
         cap = cv2.VideoCapture(int(source_str))
     else:
-        # File path or stream URL
-        cap = cv2.VideoCapture(str(source_str))
+        # File path or stream URL - resolve path robustly
+        resolved = config.resolve_video_path(str(source_str)) if config else str(source_str)
+        cap = cv2.VideoCapture(resolved)
+        if not cap.isOpened() and resolved != str(source_str):
+            cap = cv2.VideoCapture(str(source_str))
 
     if not cap.isOpened():
         raise IOError(f"Unable to open video source: {source_str}")

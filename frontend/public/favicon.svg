@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="triGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0071E3" />
+      <stop offset="50%" stop-color="#30D158" />
+      <stop offset="100%" stop-color="#FF9F0A" />
+    </linearGradient>
+    <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#30D158" />
+      <stop offset="60%" stop-color="#0071E3" />
+      <stop offset="100%" stop-color="#060810" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Pill Shield -->
+  <rect width="64" height="64" rx="16" fill="#0E1118" />
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="15.25" stroke="url(#triGlow)" stroke-width="1.5" stroke-opacity="0.6" />
+
+  <!-- Trinetra Eye 1: Top Watchful Eye (Third Eye of Foresight) -->
+  <path d="M32 10 C24 16, 24 22, 32 28 C40 22, 40 16, 32 10 Z" fill="none" stroke="#30D158" stroke-width="2" stroke-linejoin="round" />
+  <circle cx="32" cy="19" r="2.5" fill="#30D158" />
+
+  <!-- Trinetra Eye 2 & 3: Primary Surveillance Field of View -->
+  <!-- Left Eye Arc -->
+  <path d="M10 38 C18 28, 30 28, 32 38 C28 46, 16 46, 10 38 Z" fill="none" stroke="#0071E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Right Eye Arc -->
+  <path d="M54 38 C46 28, 34 28, 32 38 C36 46, 48 46, 54 38 Z" fill="none" stroke="#0071E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Central Unified Radar Aperture -->
+  <circle cx="32" cy="38" r="6" fill="url(#irisGrad)" stroke="#FFFFFF" stroke-width="1.5" />
+  <circle cx="32" cy="38" r="2" fill="#FFFFFF" />
+
+  <!-- Tri-Axis Surveillance Crosshairs -->
+  <line x1="32" y1="30" x2="32" y2="33" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="32" y1="43" x2="32" y2="46" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="24" y1="38" x2="27" y2="38" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="37" y1="38" x2="40" y2="38" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+</svg>

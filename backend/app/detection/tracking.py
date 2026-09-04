@@ -14,41 +14,58 @@ from datetime import datetime, timezone
 from typing import Any, List, Optional, Tuple, Union
 
 
-# Mapping of COCO dataset class names to target classes ("person" or "vehicle")
-# Prompt: "Detect people and vehicles. Map relevant vehicle classes such as car,
-# motorcycle, bus and truck into the single output class 'vehicle'."
+# Mapping of COCO dataset class names to target categories
 CLASS_NAME_MAPPING = {
+    # Person
     "person": "person",
+
+    # Vehicles mapped to "vehicle"
     "car": "vehicle",
     "motorcycle": "vehicle",
     "bus": "vehicle",
     "truck": "vehicle",
     "bicycle": "vehicle",
+    "train": "vehicle",
+    "boat": "vehicle",
+    "airplane": "vehicle",
 }
 
-# Standard COCO class IDs in YOLOv8
-# 0: person, 1: bicycle, 2: car, 3: motorcycle, 5: bus, 7: truck
+# Standard COCO class IDs in YOLOv8 for target tracking
 COCO_TARGET_CLASS_IDS = {
     0: "person",
-    1: "vehicle",
-    2: "vehicle",
-    3: "vehicle",
-    5: "vehicle",
-    7: "vehicle",
+    1: "vehicle",  # bicycle
+    2: "vehicle",  # car
+    3: "vehicle",  # motorcycle
+    4: "vehicle",  # airplane
+    5: "vehicle",  # bus
+    6: "vehicle",  # train
+    7: "vehicle",  # truck
+    8: "vehicle",  # boat
 }
 
 
-def map_class(class_name: Optional[str] = None, class_id: Optional[int] = None) -> Optional[str]:
+def map_class(
+    class_name: Optional[str] = None,
+    class_id: Optional[int] = None,
+    allow_all: bool = False,
+) -> Optional[str]:
     """
-    Maps a detected class name or COCO ID to "person" or "vehicle".
-    Returns None if the class is not one of our monitored targets.
+    Maps a detected class name or COCO ID to 'person', 'vehicle', or None (ignored).
+    If allow_all=True, returns the original class name for any detected object.
     """
     if class_name is not None:
         lowered = class_name.strip().lower()
         if lowered in CLASS_NAME_MAPPING:
             return CLASS_NAME_MAPPING[lowered]
-    if class_id is not None and class_id in COCO_TARGET_CLASS_IDS:
-        return COCO_TARGET_CLASS_IDS[class_id]
+        if allow_all:
+            return lowered
+        return None
+    if class_id is not None:
+        if class_id in COCO_TARGET_CLASS_IDS:
+            return COCO_TARGET_CLASS_IDS[class_id]
+        if allow_all:
+            return f"class_{class_id}"
+        return None
     return None
 
 
@@ -150,9 +167,7 @@ def create_tracked_object(
     """
     if class_name not in ("person", "vehicle"):
         mapped = map_class(class_name=class_name)
-        if mapped is None:
-            raise ValueError(f"Invalid object class '{class_name}'. Must be 'person' or 'vehicle'.")
-        class_name = mapped
+        class_name = mapped if mapped else "object"
 
     return {
         "id": format_track_id(track_id),
